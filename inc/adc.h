@@ -5,7 +5,7 @@
 
 // Config ADC
 #define ADCPORT = ADCSRA;
-
+float voltage;
 // 
 void initADC(int AREF)
 {
@@ -36,13 +36,25 @@ void initADC(int AREF)
 	ADCSRA = 0x00;
 	// ADC Control and Status Register A
 	sbi(ADCSRA,ADEN);	// Enable ADC startet den Konversionsvorgang
-	//sbi(ADCSRA,ADFR);	// Free Running Mode
+	sbi(ADCSRA,ADATE);	// Free Running Mode
 	sbi(ADCSRA,ADIE);	// ADC Interrupt wird freigegeben: Interrupt Enable
+	// ADC Takt sollte zwischen 50kHz und 200kHz liegen
+	// 20MHz / 128 = 156kHz
+	ADCSRA = (1<<ADPS2) | (1<<ADPS1) | (1<<ADPS0); //Takt PreSkaler teilen durch 128
+	ADCSRB = (0<<ADTS2) | (0<<ADTS1) | (0<<ADTS0);
+	
+	// Den ADC initialisieren und einen sog. Dummyreadout machen
+	ADCSRA |= (1<<ADSC);
+	while(ADCSRA & (1<<ADSC));
+	voltage = ADCW;
+	voltage = 0;
 	
 }
 
 int readADC(void)
 {
 	sbi(ADCSRA,ADSC);
-	return ADCH;
+	while(ADCSRA & (1<<ADSC));
+	voltage = ADCW;
+	return voltage;
 }
