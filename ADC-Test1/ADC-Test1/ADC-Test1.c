@@ -14,36 +14,22 @@
 unsigned int ADC_result;
 char str[4];
 int counter = 0;
-float v;
 int main(void)
 {
 	initLDC(); // LDC Display und Cursor intialisieren
 	
-	//initADC(2);
-	ADCSRA = (1<<ADEN) | (1<<ADPS2) | (1<<ADPS1) | (1<<ADPS0);
-	ADMUX = 0x00;
-	ADMUX |= (1<<REFS0) | (1<<REFS1);
-	
-	ADCSRA |= (1<<ADSC);
-	while(ADCSRA & (1<<ADSC));
-	v = ADCW;
-	v = 0;
+	initADC(5);
 	lcdWrite("ADC bereit");
 	
 	lcdSetCursor(2,0);
 	
     while(1)
     {
-		ADMUX = 0x00;
-		ADMUX |= (1<<REFS0) | (1<<REFS1);
-		v = 0;
+        ADC_result = readADC();
+		sprintf(str,"Cnt:%02dADC:%04d",counter,ADC_result);
 		
-		ADCSRA |= (1<<ADSC);
-		while(ADCSRA & (1<<ADSC));
-		v = ADCW;
-        //ADC_result = readADC();
 		_delay_ms(500);
-		sprintf(str,"Cnt:%02dADC:%0.4f",counter,v);
+		
 		lcdSetCursor(2,0);
 		lcdWrite(str);
 		if(counter > 9){
