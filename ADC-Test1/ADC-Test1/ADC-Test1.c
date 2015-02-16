@@ -13,7 +13,7 @@
 
 unsigned int ADC_result;
 char str[4];
-
+int counter = 0;
 int main(void)
 {
 	initLDC(); // LDC Display und Cursor intialisieren
@@ -22,14 +22,21 @@ int main(void)
 	lcdWrite("ADC bereit");
 	
 	lcdSetCursor(2,0);
-	lcdWrite("0.00 V");
 	
     while(1)
     {
         ADC_result = readADC();
-		_delay_ms(100);
-		sprintf(str,"%04d",ADC_result);
+		sprintf(str,"Cnt:%02dADC:%04d",counter,ADC_result);
+		
+		_delay_ms(500);
+		
 		lcdSetCursor(2,0);
 		lcdWrite(str);
+		if(counter > 9){
+			counter = 0;	
+		}
+		else{
+			counter++;
+		}
     }
 }
