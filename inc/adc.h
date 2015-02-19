@@ -1,9 +1,7 @@
 
 // includes
-#include <util/delay.h>
 #include "BitUtilities.h"
 
-// 
 void initADC(int AREF)
 {
 	// Lösche alle Bits

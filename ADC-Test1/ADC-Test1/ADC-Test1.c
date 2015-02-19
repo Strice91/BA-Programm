@@ -7,36 +7,29 @@
 
 #include <stdio.h>
 #include <avr/io.h>
-#include <util/delay.h>
-#include "..\..\inc\adc.h"
-#include "..\..\inc\lcd.h"
+
+#include "../../inc/lcd.h"
+#include "../../inc/adc.h"
 
 unsigned int ADC_result;
 char str[4];
 int counter = 0;
 int main(void)
 {
-	initLDC(); // LDC Display und Cursor intialisieren
+	lcd_init(LCD_DISP_ON);
+	lcd_clrscr();
 	
 	initADC(2);
-	lcdWrite("ADC bereit");
+	lcd_puts("ADC ready!");
 	
-	lcdSetCursor(2,0);
-	
-    while(1)
-    {
-        ADC_result = readADC();
-		sprintf(str,"Cnt:%02dADC:%04d",counter,ADC_result);
-		
-		_delay_ms(500);
-		
-		lcdSetCursor(2,0);
-		lcdWrite(str);
-		if(counter > 9){
-			counter = 0;	
+	while(1){
+		ADC_result = readADC();
+		if(counter>9999){
+			counter = 0;
 		}
-		else{
-			counter++;
-		}
-    }
+		lcd_gotoxy(0,1);
+		sprintf(str,"%04d ADC:%04d",counter,ADC_result);
+		lcd_puts(str);
+		counter++;
+	}
 }
