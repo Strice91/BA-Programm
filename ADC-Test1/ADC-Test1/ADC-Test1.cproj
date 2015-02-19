@@ -128,15 +128,32 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\..\inc\adc.c">
+      <SubType>compile</SubType>
+      <Link>inc\adc.c</Link>
+    </Compile>
+    <Compile Include="..\..\inc\adc.h">
+      <SubType>compile</SubType>
+      <Link>inc\adc.h</Link>
+    </Compile>
+    <Compile Include="..\..\inc\BitUtilities.h">
+      <SubType>compile</SubType>
+      <Link>inc\BitUtilities.h</Link>
+    </Compile>
+    <Compile Include="..\..\inc\lcd.c">
+      <SubType>compile</SubType>
+      <Link>inc\lcd.c</Link>
+    </Compile>
+    <Compile Include="..\..\inc\lcd.h">
+      <SubType>compile</SubType>
+      <Link>inc\lcd.h</Link>
+    </Compile>
     <Compile Include="ADC-Test1.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="lcd.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="lcd.h">
-      <SubType>compile</SubType>
-    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="inc" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>
