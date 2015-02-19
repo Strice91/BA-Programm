@@ -18,7 +18,7 @@ int main(void)
 {
 	initLDC(); // LDC Display und Cursor intialisieren
 	
-	initADC(5);
+	initADC(2);
 	lcdWrite("ADC bereit");
 	
 	lcdSetCursor(2,0);

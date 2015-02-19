@@ -13,17 +13,17 @@ void initADC(int AREF)
 	switch(AREF) 
 	{
 		case 1: // Referenzspannung AREF = 1.1V 
-			sbi(ADMUX,REFS1);			// REFS0 = 0,  REFS1 = 1
+			sbi(ADMUX,REFS1);	// REFS0 = 0,  REFS1 = 1
 		break;
 		case 2: // Referenzspannung AREF = 2.56V 
 			sbi(ADMUX,REFS0);	// REFS0 = 1  
 			sbi(ADMUX,REFS1);	// REFS1 = 1
 		break;
 		case 5: // Referenzspannung AREF = AVcc 
-			sbi(ADMUX,REFS0);			// REFS0 = 1,  REFS1 = 0
+			sbi(ADMUX,REFS0);	// REFS0 = 1,  REFS1 = 0
 		break;
 		default: // Referenzspannung AREF = AVcc 
-			sbi(ADMUX,REFS0);			// REFS0 = 1,  REFS1 = 0
+			sbi(ADMUX,REFS0);	// REFS0 = 1,  REFS1 = 0
 		break;
 	}
 	
