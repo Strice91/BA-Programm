@@ -18,21 +18,7 @@ ISR(TIMER1_COMPA_vect){
 	
 	tgl(PORTD,2);
 	
-	//------------------------------------------//
-	//		Seconds and Remainder handling		//
-	//------------------------------------------//
-	
-	#if XTAL % SAMPLE_FREQ						// if there is a remainder
-		OCR1A = XTAL / SAMPLE_FREQ - 1;			// compare SAMPLE_FREQ - 1 times
-	#endif
-	if( --timerCounter == 0 ){
-		timerCounter = (uint)SAMPLE_FREQ;		// Reset timer Counter for next second
-		second++;								// one second is over
-		tgl(PORTD,3);
-		#if XTAL % SAMPLE_FREQ					// handle remainder
-			OCR1A = XTAL / SAMPLE_FREQ + XTAL % SAMPLE_FREQ - 1; 
-		#endif
-	}
+	rtc_checkSecondsAndRemainder();
 }
 
 int main(void)

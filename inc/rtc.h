@@ -24,3 +24,8 @@ uchar volatile second;          // counts seconds
 // Sets up a timer which causes an Interrupt
 // Interrupt will occur with the SAMPLE_FREQ
 void rtc_initSample(void);
+
+// Check if it is necessary to increase second counter
+// and update On Compare Register if sample frequency is no
+// factor of CPU Frequency
+void rtc_checkSecondsAndRemainder(void);

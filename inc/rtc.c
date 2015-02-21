@@ -30,3 +30,22 @@ void rtc_initSample(void){
 	// Enable On Compare Interrupt when timer reaches value in OCR1A
 	sbi(TIMSK1,OCIE1A);	
 }
+
+void rtc_checkSecondsAndRemainder(void){
+	// Check if it is necessary to increase second counter
+	// and update On Compare Register if sample frequency is no 
+	// factor of CPU Frequency
+	
+	#if XTAL % SAMPLE_FREQ					// if there is a remainder
+	OCR1A = XTAL / SAMPLE_FREQ - 1;			// compare SAMPLE_FREQ - 1 times
+	#endif
+	
+	if( --timerCounter == 0 ){
+		timerCounter = (uint)SAMPLE_FREQ;		// Reset timer Counter for next second
+		second++;								// one second is over
+		tgl(PORTD,3);
+		#if XTAL % SAMPLE_FREQ					// handle remainder
+		OCR1A = XTAL / SAMPLE_FREQ + XTAL % SAMPLE_FREQ - 1;
+		#endif
+	}
+}
