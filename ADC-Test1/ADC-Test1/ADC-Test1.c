@@ -19,11 +19,11 @@ int main(void)
 	lcd_init(LCD_DISP_ON);
 	lcd_clrscr();
 	
-	initADC(2);
+	adc_init(2);
 	lcd_puts("ADC ready!");
 	
 	while(1){
-		ADC_result = readADC();
+		ADC_result = adc_readUnsigned();
 		if(counter>9999){
 			counter = 0;
 		}
