@@ -9,13 +9,18 @@
 #include <avr/interrupt.h>
 
 #define XTAL F_CPU
-#define SAMPLE_FREQ 4000L	// 4kHz
+#define SAMPLE_FREQ 4000L		// 4kHz
 
 #define uchar unsigned char
 #define uint unsigned int
 
-uchar prescaler;
-uchar volatile second;          // count seconds
+// uchar tc;
+// Is not working because SAMPLE_FREQ > 255
+// therefore use uint 
 
+uint timerCounter;				// counts timer interrupts
+uchar volatile second;          // counts seconds
+
+// Sets up a timer which causes an Interrupt
+// Interrupt will occur with the SAMPLE_FREQ
 void rtc_initSample(void);
-void rtc_initSecond(void);

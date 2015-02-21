@@ -9,66 +9,40 @@
 #include <avr/io.h>
 #include "../../inc/rtc.h"
 
-ISR(TIMER1_COMPA_vect)
-{
+ISR(TIMER1_COMPA_vect){
+	// ISR for the Timer on Compare Interrupt
+	
+	//------------------------------------------//
+	//			Call Sample Method				//
+	//------------------------------------------//
+	
 	tgl(PORTD,2);
 	
-	/*
-	if( --prescaler == 0 ){
-		prescaler = (uchar) SAMPLE_FREQ;
-		second++;      // exact one second over
-	}
-	#if XTAL % SAMPLE_FREQ
-	if (prescaler <= XTAL % SAMPLE_FREQ)
-	OCR1A += XTAL / SAMPLE_FREQ +1;   // um 1 Takt längere Periode um den Rest abzutragen 
-	//else
-	#endif
-	OCR1A += XTAL / SAMPLE_FREQ;   // kurze Periode 
-	*/
+	//------------------------------------------//
+	//		Seconds and Remainder handling		//
+	//------------------------------------------//
 	
-	#if XTAL % SAMPLE_FREQ						// bei rest
-		OCR1A = XTAL / SAMPLE_FREQ - 1;			// compare DEBOUNCE - 1 times
+	#if XTAL % SAMPLE_FREQ						// if there is a remainder
+		OCR1A = XTAL / SAMPLE_FREQ - 1;			// compare SAMPLE_FREQ - 1 times
 	#endif
-	if( --prescaler == 0 ){
-		prescaler = (uchar)SAMPLE_FREQ;
-		second++;               // exact one second over
-		#if XTAL % SAMPLE_FREQ         // handle remainder
-			OCR1A = XTAL / SAMPLE_FREQ + XTAL % SAMPLE_FREQ - 1; // compare once per second
+	if( --timerCounter == 0 ){
+		timerCounter = (uint)SAMPLE_FREQ;		// Reset timer Counter for next second
+		second++;								// one second is over
+		tgl(PORTD,3);
+		#if XTAL % SAMPLE_FREQ					// handle remainder
+			OCR1A = XTAL / SAMPLE_FREQ + XTAL % SAMPLE_FREQ - 1; 
 		#endif
 	}
-	
 }
-
-/*
-ISR(TIMER0_OVF_vect)
-{
-	tgl(PORTD,3);
-	TCNT0 = 177L;
-	#if XTAL % SAMPLE_FREQ                     // bei rest
-	OCR0A = XTAL / SAMPLE_FREQ - 1;      // compare DEBOUNCE - 1 times
-	#endif
-	if( --prescaler == 0 ){
-		prescaler = (uchar)SAMPLE_FREQ;
-		second++;               // exact one second over
-		#if XTAL % SAMPLE_FREQ         // handle remainder
-		OCR0A = XTAL / SAMPLE_FREQ + XTAL % SAMPLE_FREQ - 1; // compare once per second
-		#endif
-	}
-}*/
-
 
 int main(void)
 {
 	rtc_initSample();
 	DDRD = 0xFF;
-	second = 0;
-	//sbi(PORTD,3);
 	sei();
 	for(;;){
-		if( second == 60 )
-		second = 0;
-		//PORTD = second;         // display second (binary)
-		//tgl(PORTD,3);
+		if( second == 60 ){
+			second = 0;
+		}
 	}
-	
 }
