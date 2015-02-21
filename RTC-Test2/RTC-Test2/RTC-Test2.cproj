@@ -119,6 +119,12 @@
       <SubType>compile</SubType>
       <Link>rtc.h</Link>
     </Compile>
+    <Compile Include="debug.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="debug.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="RTC-Test2.c">
       <SubType>compile</SubType>
     </Compile>
