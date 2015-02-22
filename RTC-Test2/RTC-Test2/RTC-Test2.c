@@ -26,7 +26,7 @@ int main(void)
 {
 	rtc_initSample();
 	DDRD = 0xFF;
-	sei();
+	
 	for(;;){
 		if( second == 60 ){
 			second = 0;

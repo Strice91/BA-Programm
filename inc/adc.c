@@ -14,8 +14,9 @@ void adc_init(int AREF)
 			sbi(ADMUX,REFS1);	// REFS0 = 0,  REFS1 = 1
 		break;
 		case 2: // Referenzspannung AREF = 2.56V 
-			sbi(ADMUX,REFS0);	// REFS0 = 1  
-			sbi(ADMUX,REFS1);	// REFS1 = 1
+			ADMUX = (1<<REFS0) | (1<<REFS1);
+			//sbi(ADMUX,REFS0);	// REFS0 = 1  
+			//sbi(ADMUX,REFS1);	// REFS1 = 1
 		break;
 		case 5: // Referenzspannung AREF = AVcc 
 			sbi(ADMUX,REFS0);	// REFS0 = 1,  REFS1 = 0
