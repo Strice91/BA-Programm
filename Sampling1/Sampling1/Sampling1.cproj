@@ -119,6 +119,10 @@
       <SubType>compile</SubType>
       <Link>inc\adc.h</Link>
     </Compile>
+    <Compile Include="..\..\inc\BitUtilities.h">
+      <SubType>compile</SubType>
+      <Link>inc\BitUtilities.h</Link>
+    </Compile>
     <Compile Include="..\..\inc\debug.c">
       <SubType>compile</SubType>
       <Link>inc\debug.c</Link>

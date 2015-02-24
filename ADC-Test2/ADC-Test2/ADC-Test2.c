@@ -24,7 +24,7 @@ int main(void)
 	lcd_clrscr();
 	lcd_puts("LCD");
 
-	adc_init(5);
+	adc_init(2);
 	lcd_puts(" ADC");
 	lcd_gotoxy(0,1);
 	

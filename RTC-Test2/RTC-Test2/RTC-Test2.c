@@ -8,7 +8,7 @@
 
 #include <avr/io.h>
 #include "../../inc/rtc.h"
-#include "../../inc/debug.h"
+
 
 ISR(TIMER1_COMPA_vect){
 	// ISR for the Timer on Compare Interrupt

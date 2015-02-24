@@ -45,6 +45,7 @@ void rtc_checkSecondsAndRemainder(void){
 	if( --timerCounter == 0 ){
 		timerCounter = (uint)SAMPLE_FREQ;		// Reset timer Counter for next second
 		second++;								// one second is over
+		debug_ledToggle();							
 		#if XTAL % SAMPLE_FREQ					// handle remainder
 			OCR1A = XTAL / SAMPLE_FREQ + XTAL % SAMPLE_FREQ - 1;
 		#endif

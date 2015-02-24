@@ -7,6 +7,7 @@
 #include "BitUtilities.h"
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include "debug.h"
 
 #define XTAL F_CPU
 #define SAMPLE_FREQ 4000L		// 4kHz
