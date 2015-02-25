@@ -30,16 +30,14 @@ int main(void)
 	
     while(1)
     {
-		adc_setMux(ADC_MUX_ADC0);
 		_delay_ms(500);
-		analog_val = adc_readUnsigned();
+		analog_val = adc_readUnsigned(ADC_MUX_ADC0);
 		sprintf(str,"CH 0 -> ADC:%04d",analog_val);
         lcd_puts(str);
 		lcd_gotoxy(0,1);
 		
-		adc_setMux(ADC_MUX_ADC1);
 		_delay_ms(500);
-		analog_val = adc_readUnsigned();
+		analog_val = adc_readUnsigned(ADC_MUX_ADC1);
 		sprintf(str,"CH 1 -> ADC:%04d",analog_val);
 		lcd_puts(str);
 		lcd_gotoxy(0,1);

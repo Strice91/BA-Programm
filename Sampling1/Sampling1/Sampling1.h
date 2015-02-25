@@ -6,10 +6,12 @@
  */ 
 
 #include <avr/io.h>
-#include "../../inc/adc.h"
+#include <stdio.h>
+//#include "../../inc/adc.h"
 #include "../../inc/lcd.h"
 #include "../../inc/rtc.h"
 #include "../../inc/debug.h"
+#include "../../inc/sample.h"
 
 void sampling_init(void);
 
