@@ -10,12 +10,14 @@
 float U_ADC;
 float I_ADC;
 int cnt;
+int sample_cnt;
 
 char str[4];
 char str2[4];
 
 ISR(TIMER1_COMPA_vect){
 	smp_sample(&U_ADC, &I_ADC);
+	sample_cnt++;
 	rtc_checkSecondsAndRemainder();
 }
 
@@ -34,13 +36,13 @@ int main(void)
 		lcd_gotoxy(0,0);
 		debug_ledToggle();
 		cli();
-		sprintf(str,"I %f U %f", I_ADC, U_ADC);
+		sprintf(str,"I %04i U %04i", (int)I_ADC, (int)U_ADC);
 		lcd_puts(str);
 		lcd_gotoxy(0,1);
-		sprintf(str2,"CNT: %d",cnt);
+		sprintf(str2,"SMPs %d",sample_cnt);
 		lcd_puts(str2);
 		sei();
-		
+		sample_cnt = 0;
 		cnt++;
     }
 }
