@@ -20,10 +20,11 @@
 #define Betha 1.0
 #define A 1.0
 
-#define LP_ORDER 6
-const int16_t lp_coeff[LP_ORDER] ={5252,   5568,   5728,   5728,   5568,   5252};
-
 void smp_init(void);
-void smp_sample(float *U, float *I);
-void smp_addToSquareSum(float *U_SUM, float *I_SUM, float *P_SUM, float *U, float *I);
+void smp_sample(void);
+void smp_sampleCalculation(void);
+void smp_mainCalculation(void);
+void smp_reset(void);
+
+void writeTwoLines(int V1, int V2);
 

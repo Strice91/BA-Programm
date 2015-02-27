@@ -7,6 +7,7 @@
 
 #include <avr/io.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "../../inc/adc.h"
 #include "../../inc/lcd.h"
 #include "../../inc/rtc.h"
@@ -20,10 +21,12 @@
 #define Betha 1.0
 #define A 1.0
 
-#define LP_ORDER 6
-const int16_t lp_coeff[LP_ORDER] ={5252,   5568,   5728,   5728,   5568,   5252};
-
+#define LP_ORDER 2
+//const int16_t lp_coeff[LP_ORDER] ={5252,   5568,   5728,   5728,   5568,   5252};
+const int16_t lp_coeff[LP_ORDER] ={5252,   5568};
+	
 void smp_init(void);
 void smp_sample(void);
 int16_t lp_filter(int16_t *inp_array);
-
+void smp_calculate(void);
+void writeTwoLines(int V1, int V2);

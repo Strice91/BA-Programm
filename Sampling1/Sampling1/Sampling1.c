@@ -7,25 +7,24 @@
 
 #include "Sampling1.h"
 
-float U_ADC;
-float I_ADC;
+volatile int16_t U_ADC;
+volatile int16_t I_ADC;
 
-float U_old = 0;
-float U_temp;
-float I_temp;
+int16_t I_MEAN = 0, U_MEAN = 0;
+uint32_t U_RMS = 0, I_RMS = 0;
+uint32_t P = 0;
+int32_t i_mean_temp = 0, u_mean_temp = 0;
 
-float SCALE = 1023.0;
+uint64_t U_sqSum = 0, I_sqSum = 0, P_Sum = 0;;
 
-int cnt = 0;
-int sample_cnt;
-
-char str[4];
-char str2[4];
+int smp_cnt;
 
 ISR(TIMER1_COMPA_vect){
-	smp_sample(&U_ADC, &I_ADC);
-	sample_cnt++;
+	tic();
+	smp_sample();
+	smp_sampleCalculation();
 	rtc_checkSecondsAndRemainder();
+	toc();
 }
 
 int main(void)
@@ -45,25 +44,16 @@ int main(void)
 		
     while(1)
     {
-		if(cnt > 9999){
-			cnt = 0;
-		}
 		if(second == 1){
-			//_delay_ms(100);
 			lcd_gotoxy(0,0);
 			debug_ledToggle();
 			cli();
-			sprintf(str,"I %04i U %04i", (int)(I_ADC*1), (int)(U_ADC*1));
-			lcd_puts(str);
-			lcd_gotoxy(0,1);
-			sprintf(str2,"SMPs %d",sample_cnt);
-			lcd_puts(str2);
+			smp_mainCalculation();
+			writeTwoLines(P_Sum,P);
 			sei();
-			sample_cnt = 0;
-			cnt++;
+			smp_reset();
 			second = 0;
 		}
-
     }
 }
 
@@ -71,22 +61,60 @@ void smp_init(void){
 	adc_init(ADC_VREF_2V56, ADC_PRESCALER_DIV128, ADC_AUTOTRIGGER_SOURCE_FREERUNNING);
 }
 
-void smp_sample(float *U, float *I){
-	U_temp = (float)(adc_readUnsigned(ADC_MUX_ADC0) - U_DC_OFFSET);
-	I_temp = (float)(adc_readUnsigned(ADC_MUX_ADC1) - I_DC_OFFSET);
-	U_temp = A * ((U_temp / SCALE) + Betha * U_old);
-	*U = U_temp;
-	U_old = U_temp;
-	*I = I_temp / SCALE;
+void smp_sample(void){
+	U_ADC = adc_readUnsigned(ADC_MUX_ADC0);
+	I_ADC = adc_readUnsigned(ADC_MUX_ADC1);
+	smp_cnt++;
+}
+
+void smp_sampleCalculation(void){
+	int32_t i_temp;
+	int32_t u_temp;
+	int32_t p_temp;
 	
-	//*U = (float)(adc_readUnsigned(ADC_MUX_ADC0) - U_DC_OFFSET);
-	//*I = (float)(adc_readUnsigned(ADC_MUX_ADC1) - I_DC_OFFSET);
+	u_mean_temp += (int32_t)U_ADC;
+	i_mean_temp += (int32_t)I_ADC;
+	
+	u_temp = (int32_t)(U_ADC - U_MEAN);
+	i_temp = (int32_t)(I_ADC - I_MEAN);
+	
+	U_sqSum += (uint64_t)(u_temp * u_temp);
+	I_sqSum += (uint64_t)(i_temp * i_temp);
+	
+	p_temp = ((int64_t)u_temp * (int64_t)i_temp);
+	P_Sum += p_temp;
 }
 
-void smp_addToSquareSum(float *U_SUM, float *I_SUM, float *P_SUM, float *U, float *I){
-	*U_SUM = *U_SUM + *U * *U;
-	*I_SUM = *I_SUM + *I * *I;
-	*P_SUM = *P_SUM + (Ku * *U) * (Ki * *I);
+void smp_mainCalculation(void){
+	U_RMS = (uint32_t)(U_sqSum/smp_cnt);
+	I_RMS = (uint32_t)(I_sqSum/smp_cnt);
+	
+	P = (uint32_t)(((uint64_t)U_RMS * (uint64_t)I_RMS) / 100000);
+	
+	U_MEAN = (int16_t)(u_mean_temp/smp_cnt);
+	I_MEAN = (int16_t)(i_mean_temp/smp_cnt);
+	
 }
 
+void smp_reset(void){
+	smp_cnt = 0;
+	U_sqSum = 0;
+	I_sqSum = 0;
+	P_Sum = 0;
+	u_mean_temp = 0;
+	i_mean_temp = 0;
+}
 
+void writeTwoLines(int V1, int V2){
+	char line1[15];
+	char line2[15];
+	
+	sprintf(line1,"V1: %07i",V1);
+	sprintf(line2,"V2: %07i",V2);
+	
+	lcd_clrscr();
+	lcd_gotoxy(0,0);
+	lcd_puts(line1);
+	lcd_gotoxy(0,1);
+	lcd_puts(line2);
+}
