@@ -26,5 +26,5 @@ void smp_sampleCalculation(void);
 void smp_mainCalculation(void);
 void smp_reset(void);
 
-void writeTwoLines(int V1, int V2);
+void writeTwoLines(char *name1, char *name2, int32_t V1, int32_t V2);
 
