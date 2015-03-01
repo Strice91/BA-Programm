@@ -15,7 +15,7 @@ classdef uart < handle
         open(obj,Port)
         close(obj)
         configure(obj,property,value)
-        read(obj)
+        [U,I] = read(obj)
         checkStart(obj)
     end
     

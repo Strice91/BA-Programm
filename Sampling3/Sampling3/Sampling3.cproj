@@ -139,14 +139,6 @@
       <SubType>compile</SubType>
       <Link>inc\rtc.h</Link>
     </Compile>
-    <Compile Include="..\..\inc\sample.c">
-      <SubType>compile</SubType>
-      <Link>inc\sample.c</Link>
-    </Compile>
-    <Compile Include="..\..\inc\sample.h">
-      <SubType>compile</SubType>
-      <Link>inc\sample.h</Link>
-    </Compile>
     <Compile Include="..\..\inc\uart.c">
       <SubType>compile</SubType>
       <Link>inc\uart.c</Link>
