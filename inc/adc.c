@@ -90,6 +90,7 @@ void adc_disableAutoTrigger(void){
 }
 
 int adc_readUnsigned(enum adc_mux_setting mux){
+	//adc_setReferenceVoltage(vref);		// Choose Reference Voltage
 	adc_setMux(mux);					// Choose Channel
 	adc_startConversion();				// Start AD Conversion
 	adc_ConversionCompleteAndClear();	// Wait and Clear
