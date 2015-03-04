@@ -11,6 +11,7 @@ void adc_init(enum adc_vref vref, enum adc_prescaler prescaler, enum adc_auto_tr
 	adc_setReferenceVoltage(vref);
 	adc_initPrescaler(prescaler);
 	adc_setAutoTriggerSource(triggerSource);
+	adc_endableInterrupt();
 }
 
 void adc_initPrescaler(enum adc_prescaler prescaler){
@@ -109,7 +110,7 @@ double adc_readDouble(enum adc_mux_setting mux){
 void adc_ConversionCompleteAndClear(void){
 	//while(ADCSRA & (1<<ADSC));
 	while(!(ADCSRA & (1<<ADIF)));	// Wait for the ADC Interrupt Fag
-	ADCSRA|=(1<<ADIF);				// Clear Flag
+	//ADCSRA|=(1<<ADIF);				// Clear Flag
 }
 
 void adc_startConversion(void){

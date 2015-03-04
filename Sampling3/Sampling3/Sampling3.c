@@ -44,6 +44,10 @@ ISR(TIMER1_COMPA_vect){
 	toc();
 }
 
+ISR(ADC_vect){
+	debug_ledToggle();
+}
+
 int main(void)
 {
 	debug_init();
