@@ -20,10 +20,10 @@ end
 if input_cnt
     data = zeros(input_cnt,1);
     for x = 1:input_cnt
-        data(x) = str2double(read_array{x});
+        data(x) = str2num(read_array{x});
     end
-    U = data(1:input_cnt/2);
-    I = data(input_cnt/2 + 1:end);
+    U = uint16(data(1:input_cnt/2));
+    I = uint16(data(input_cnt/2 + 1:end));
 else
     data = 0;
 end
