@@ -16,16 +16,12 @@ void smp_init(void){
 	adc_init(ADC_VREF_2V56, ADC_PRESCALER_DIV128, ADC_AUTOTRIGGER_SOURCE_FREERUNNING);
 }
 
-void smp_sample(float *U, float *I){
-	/*
-	U_temp = (float)(adc_readUnsigned(ADC_MUX_ADC0) - U_DC_OFFSET);
-	I_temp = (float)(adc_readUnsigned(ADC_MUX_ADC1) - I_DC_OFFSET);
-	U_temp = U_temp;
-	*U = A * (U_temp / + Betha * U_old);
-	*I = I_temp;*/
-	
-	*U = (float)(adc_readUnsigned(ADC_MUX_ADC0) - U_DC_OFFSET);
-	*I = (float)(adc_readUnsigned(ADC_MUX_ADC1) - I_DC_OFFSET);
+void smp_sample(int16_t *U, int16_t *I, int smp_cnt){
+	// read converted analog values
+	U_ADC = adc_readUnsigned(ADC_MUX_ADC0);
+	I_ADC = adc_readUnsigned(ADC_MUX_ADC1);
+	// increase sample counter
+	smp_cnt++;
 }
 
 void smp_addToSquareSum(float *U_SUM, float *I_SUM, float *P_SUM, float *U, float *I){
