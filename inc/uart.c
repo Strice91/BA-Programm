@@ -39,3 +39,26 @@ void uart_puts(char *s){
 		s++;
 	}
 }
+
+/*
+ * Send two Arrays
+ */
+/*
+void uart_sendTwoArrays(int16_t U[], int16_t I[], int size){
+	char str[4];
+	int i;
+	
+	uart_puts("S\n");
+	
+	for(i=0;i<=999;i++){
+		sprintf(str,"%i\n",U[i]);
+		uart_puts(str);
+	}
+	
+	for(i=0;i<=999;i++){
+		sprintf(str,"%i\n",I[i]);
+		uart_puts(str);
+	}
+	
+	uart_puts("E\n");
+}*/

@@ -110,7 +110,7 @@ double adc_readDouble(enum adc_mux_setting mux){
 void adc_ConversionCompleteAndClear(void){
 	//while(ADCSRA & (1<<ADSC));
 	while(!(ADCSRA & (1<<ADIF)));	// Wait for the ADC Interrupt Fag
-	//ADCSRA|=(1<<ADIF);				// Clear Flag
+	ADCSRA|=(1<<ADIF);				// Clear Flag
 }
 
 void adc_startConversion(void){

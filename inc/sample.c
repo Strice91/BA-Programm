@@ -9,23 +9,39 @@
 #include "sample.h"
 
 float U_old = 0;
-float U_temp;
-float I_temp;
 
 void smp_init(void){
 	adc_init(ADC_VREF_2V56, ADC_PRESCALER_DIV128, ADC_AUTOTRIGGER_SOURCE_FREERUNNING);
 }
 
-void smp_sample(int16_t *U, int16_t *I, int smp_cnt){
+int16_t smp_sampleU(void){
 	// read converted analog values
-	U_ADC = adc_readUnsigned(ADC_MUX_ADC0);
-	I_ADC = adc_readUnsigned(ADC_MUX_ADC1);
-	// increase sample counter
-	smp_cnt++;
+	return (int16_t)adc_readUnsigned(ADC_MUX_ADC0);
 }
 
-void smp_addToSquareSum(float *U_SUM, float *I_SUM, float *P_SUM, float *U, float *I){
-	*U_SUM = *U_SUM + *U * *U;
-	*I_SUM = *I_SUM + *I * *I;
-	*P_SUM = *P_SUM + (Ku * *U) * (Ki * *I);
+int16_t smp_sampleI(void){
+	// read converted analog values
+	return (int16_t)adc_readUnsigned(ADC_MUX_ADC1);
+
+}
+
+void smp_sampleCalculation(uint64_t *UsqSum, uint64_t *IsqSUM, int64_t *Psum, int16_t U_mean, int16_t I_mean, int16_t U, int16_t I){
+	int32_t u_temp;
+	int32_t i_temp;
+	int32_t p_temp;
+	
+	u_temp = ((int32_t)U - (int32_t)U_mean);
+	i_temp = ((int32_t)I - (int32_t)I_mean);
+	p_temp = (int64_t)u_temp * (int64_t)i_temp;
+	
+	*UsqSum += (uint64_t)(u_temp * u_temp);
+	*IsqSUM += (uint64_t)(i_temp * i_temp);
+	*Psum += p_temp;
+	
+}
+
+void smp_reset(int *smp_cnt){
+	/* Reset all sums and counters for the
+	   next measurement period */
+	*smp_cnt = 0;
 }

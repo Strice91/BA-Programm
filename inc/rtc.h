@@ -10,7 +10,7 @@
 #include "debug.h"
 
 #define XTAL F_CPU
-#define SAMPLE_FREQ 1000L		// 4kHz
+#define SAMPLE_FREQ 500L		// 4kHz
 
 #define uchar unsigned char
 #define uint unsigned int

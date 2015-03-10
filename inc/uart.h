@@ -5,7 +5,8 @@
  *  Author: Fabi Rosenthal
  */ 
 #include <avr/io.h>
- 
+#include <stdio.h>
+
 #ifndef UART_H_
 	#define UART_H_
  
@@ -32,5 +33,6 @@
 	void uart_puts(char *s);
 	void uart_putc(unsigned char data);
 	void uart_init(void);
+	//void uart_sendTwoArrays(int16_t *U, int16_t *I, int size);
  
 #endif /* UART_H_ */

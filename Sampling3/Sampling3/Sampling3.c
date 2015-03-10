@@ -44,9 +44,9 @@ ISR(TIMER1_COMPA_vect){
 	toc();
 }
 
-ISR(ADC_vect){
+/*ISR(ADC_vect){
 	debug_ledToggle();
-}
+}*/
 
 int main(void)
 {
@@ -61,7 +61,7 @@ int main(void)
 		//uart_puts(str);
 		if(second == 1){
 			cli();
-			
+			debug_ledOn();
 			uart_puts("S\n");
 			
 			for(i=0;i<=999;i++){
@@ -76,8 +76,8 @@ int main(void)
 			
 			uart_puts("E\n");
 			
-			//_delay_ms(1000);
 			second = 0;
+			debug_ledOff();
 			sei();
 			smp_reset();
 		}

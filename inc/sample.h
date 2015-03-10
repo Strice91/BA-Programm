@@ -15,4 +15,7 @@
 #define A 0.5
 
 void smp_init(void);
-void smp_sample(float *U, float *I);
+int16_t smp_sampleU(void);
+int16_t smp_sampleI(void);
+void smp_reset(int *smp_cnt);
+void smp_sampleCalculation(uint64_t *UsqSum, uint64_t *IsqSUM, int64_t *Psum, int16_t U_mean, int16_t I_mean, int16_t U, int16_t I);
