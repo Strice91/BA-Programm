@@ -1,14 +1,13 @@
 function [ U,I ] = measureUI(PORT)
 
-UART = uart();
-UART.open(PORT);
+UART = uart();          % UART Object
+UART.open(PORT);        % Open UART connection
+max_read = 12;          % Number of Measurements
 
-prompt = 'Type y for next Measurement: ';
-
-for i = 1:7
+for i = 1:max_read
 
     while 1
-        if i ~= 7
+        if i ~= max_read
             prompt = 'Type y for next Measurement: ';
         else
             prompt = 'Type y to exit: ';
@@ -17,7 +16,7 @@ for i = 1:7
         fprintf(sprintf('Measuring Data Set %d\n',i));
         input('Start Measurement with Enter');
         
-        [U{i},I{i}] = UART.read();
+        [U{i},I{i}] = UART.read();      % Read Data from µC
         
         fprintf('Measurement complete\n');
         
@@ -34,9 +33,9 @@ for i = 1:7
         min_I = min(I{i});
         
         fprintf(sprintf('%d values for U, %d values for I\n',l_U,l_I));
-        fprintf(sprintf('U_mean = %.2f, I_mean = %.2f\n',mean_U,mean_I));
-        fprintf(sprintf('U_max  = %.2f, I_max  = %.2f\n',max_U,max_I));
-        fprintf(sprintf('U_min  = %.2f, I_min  = %.2f\n',min_U,min_I));
+        fprintf(sprintf('U_mean = %3.2f, I_mean = %3.2f\n',mean_U,mean_I));
+        fprintf(sprintf('U_max  = %3.2f, U_min  = %3.2f\n',max_U,min_U));
+        fprintf(sprintf('I_max  = %3.2f, I_min  = %3.2f\n',max_I,min_I));
         fprintf('\n');
         
         result = input(prompt,'s');
@@ -46,20 +45,20 @@ for i = 1:7
     end
 end
 
+% Information about the measurement conditions
 info.Vref = 2.56;
 info.smp_freq = 1000;
-info.Dif_R1 = 1000000;
-info.Dif_R2 = 33000;
+info.Dif_R1 = 18000;
+info.Dif_R2 = 570;
 info.date = datestr(date);
 
+% Save measurement
 prompt = 'Enter filename to save Measurement: ';
 filename = input(prompt,'s');
 path = fullfile('data',filename);
 save(path,'U','I','info')
 
-
-
-UART.close();
+UART.close();       % Close the UART connection
 
 end
 
