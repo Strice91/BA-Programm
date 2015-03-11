@@ -14,6 +14,9 @@ for i = 1:smp_cnt
    u_temp = int32(int16(U(i)) - U_mean);
    i_temp = int32(int16(I(i)) - I_mean);
    
+   %u_temp = int32(int16(U(i)));
+   %i_temp = int32(int16(I(i)));
+   
    p_temp = int64(u_temp) * int64(i_temp);
    
    UsqSum = UsqSum + uint64(u_temp * u_temp);

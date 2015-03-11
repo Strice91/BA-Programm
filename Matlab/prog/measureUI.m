@@ -1,8 +1,14 @@
-function [ U,I ] = measureUI(PORT)
+function [ U,I ] = measureUI(PORT,MeasRows)
 
 UART = uart();          % UART Object
 UART.open(PORT);        % Open UART connection
-max_read = 12;          % Number of Measurements
+if nargin > 1
+    max_read = MeasRows;
+else
+    max_read = 12;          % Number of Measurements
+end
+
+
 
 for i = 1:max_read
 
