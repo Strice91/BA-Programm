@@ -18,8 +18,12 @@ for i = 1:smp_cnt
    i_temp = int32(int16(I(i)) - I_mean);
    u_temp = int32(AInv * (double(u_temp) + Betha * double(u_old)));
    
-   %u_temp = int32(int16(U(i)));
-   %i_temp = int32(int16(I(i)));
+   %u_temp = (u_temp + u_old) / 2;
+   %u_old = u_temp;
+   
+   %if i_temp < 5
+   %    i_temp = 0;
+   %end
    
    p_temp = int64(u_temp) * int64(i_temp);
    
