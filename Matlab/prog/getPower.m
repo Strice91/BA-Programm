@@ -8,7 +8,13 @@ S = uint32(uint64(Urms) * uint64(Irms));
 %S = Urms * Irms;
 P = int32(Psum/smp_cnt);
 
-cosPhi = double(P) / double(bitsra(S,6));
+if P > S
+    P = int32(S);
+elseif P < -S
+    P = - int32(S);
+end
+    
+cosPhi = double(P) / double(S);
 
 end
 

@@ -25,6 +25,7 @@ int64_t Psum = 0;						// sum of instantaneous active power
 
 uint32_t S = 0;							// apparent power
 int32_t P = 0;							// active power
+int16_t power_factor;
 
 int16_t U_Array[500];					
 int16_t I_Array[500];					
@@ -74,8 +75,8 @@ void smp_mainCalculation(void){
 	   every measurement period (e.g. 1 sec) */
 	
 	// calculate RMS values
-	U_RMS = (uint32_t)sqrt((UsqSum/smp_cnt));	//TO DO: smoothing | - Offset?
-	I_RMS = (uint32_t)sqrt((IsqSum/smp_cnt));	//TO DO: smoothing | - Offset?
+	U_RMS = (uint32_t)sqrt((UsqSum*100/smp_cnt));	//TO DO: smoothing | - Offset?
+	I_RMS = (uint32_t)sqrt((IsqSum*100/smp_cnt));	//TO DO: smoothing | - Offset?
 	
 	//TO Do cut of to small values of U_RMS, I_RMS -> noise
 	
@@ -84,7 +85,9 @@ void smp_mainCalculation(void){
 	S = (uint32_t)((uint64_t)U_RMS * (uint64_t)I_RMS); // -> / 100000 ?
 	
 	// active power
-	P = (int32_t)(Psum/smp_cnt); // -> + Offest?
+	P = (int32_t)(Psum/smp_cnt)*100; // -> + Offest?
+	
+	power_factor = (int16_t)(1000*(float)P/(float)S);
 	
 	// update mean values form this measurement period 
 	U_MEAN = (int16_t)(u_sum/smp_cnt);
@@ -129,20 +132,20 @@ int main(void)
 			smp_mainCalculation();
 			
 			_delay_ms(500);
-			sprintf(str,"UsqSum|%10lu| IsqSum|%10lu| Psum|%10li| Umean|%5i| Imean|%5i| URMS|%10lu| IRMS|%10lu| S|%10lu| P|%10li|\n\r",(uint32_t)UsqSum,(uint32_t)IsqSum,(int32_t)Psum,U_MEAN,I_MEAN,U_RMS,I_RMS,S,P);
+			sprintf(str,"UsqSum|%10lu| IsqSum|%10lu| Psum|%10li| Umean|%5i| Imean|%5i| URMS|%10lu| IRMS|%10lu| S|%10lu| P|%10li| cos|%5i|\n\r",(uint32_t)UsqSum,(uint32_t)IsqSum,(int32_t)Psum,U_MEAN,I_MEAN,U_RMS,I_RMS,S,P,power_factor);
 			uart_puts(str);
 			
 			/*
-			uart_puts("S\n");
+			uart_puts("S\n\r");
 			for(i=0;i<=499;i++){
-				sprintf(str,"%i\n",U_Array[i]);
+				sprintf(str,"%i\n\r",U_Array[i]);
 				uart_puts(str);
 			}
 			for(i=0;i<=499;i++){
-				sprintf(str,"%i\n",I_Array[i]);
+				sprintf(str,"%i\n\r",I_Array[i]);
 				uart_puts(str);
 			}
-			uart_puts("E\n");
+			uart_puts("E\n\r");
 			*/
 			second = 0;
 			debug_ledOff();
