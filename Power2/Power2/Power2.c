@@ -131,7 +131,7 @@ int main(void)
 			
 			smp_mainCalculation();
 			/*
-			_delay_ms(500);
+			_delay_ms(250);
 			sprintf(str,"UsqSum|%10lu| IsqSum|%10lu| Psum|%10li| Umean|%5i| Imean|%5i| URMS|%10lu| IRMS|%10lu| S|%10lu| P|%10li| cos|%5i|\n\r",(uint32_t)UsqSum,(uint32_t)IsqSum,(int32_t)Psum,U_MEAN,I_MEAN,U_RMS,I_RMS,S,P,power_factor);
 			uart_puts(str);
 			*/

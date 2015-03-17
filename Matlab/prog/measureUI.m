@@ -8,7 +8,7 @@ else
     max_read = 12;          % Number of Measurements
 end
 
-
+flush = 1;
 
 for i = 1:max_read
 
@@ -22,7 +22,7 @@ for i = 1:max_read
         fprintf(sprintf('Measuring Data Set %d\n',i));
         input('Start Measurement with Enter');
         
-        [U{i},I{i}] = UART.readUI();      % Read Data from µC
+        [U{i},I{i}] = UART.readUI(flush);      % Read Data from µC
         
         fprintf('Measurement complete\n');
         

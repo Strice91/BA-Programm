@@ -1,7 +1,9 @@
-function [U,I] = readUI(obj)
+function [U,I] = readUI(obj,flush)
 
-% Flush the data in the input buffer.
-flushinput(obj.Device);
+if flush
+    % Flush the data in the input buffer.
+    flushinput(obj.Device);
+end
 
 obj.checkStart();
 

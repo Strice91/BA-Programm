@@ -21,6 +21,7 @@ obj.configure('InputBufferSize', 65536);
 obj.configure('BaudRate', 115200);
 
 obj.StartString = 'S';
+obj.DataIdentifier = 'D';
 obj.EndString = 'E';
 
 fopen(obj.Device);
