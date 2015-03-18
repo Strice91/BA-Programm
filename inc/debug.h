@@ -5,21 +5,26 @@
  *  Author: Strice
  */ 
 
-#include "BitUtilities.h"
-#include <avr/io.h>
+#ifndef DEBUG_H
+	#define DEBUG_H
 
-#define DB_PORT PORTD
-#define DB_DDR DDRD
-#define DB_LED1	2
-#define DB_LED2	3
+	#include "BitUtilities.h"
+	#include <avr/io.h>
 
-int processTime;
+	#define DB_PORT PORTD
+	#define DB_DDR DDRD
+	#define DB_LED1	2
+	#define DB_LED2	3
 
-void debug_init();
+	int processTime;
 
-void tic(void);
-int toc(void);
+	void debug_init();
 
-void debug_ledOn(void);
-void debug_ledOff(void);
-void debug_ledToggle(void);
+	void tic(void);
+	int toc(void);
+
+	void debug_ledOn(void);
+	void debug_ledOff(void);
+	void debug_ledToggle(void);
+
+#endif //DEBUG_H

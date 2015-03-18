@@ -1,19 +1,20 @@
 /*
  * uart.h
  *
- * Created: 20.11.2012
- *  Author: Fabi Rosenthal
+ * Created: 18.03.2015 20:36:18
+ *  Author: Strice
  */ 
-#include <avr/io.h>
-#include <stdio.h>
 
-#ifndef UART_H_
-	#define UART_H_
+#ifndef UART_H
+ 	#define UART_H
+
+ 	#include <avr/io.h>
+	#include <stdio.h>
  
-	#define BAUD		115200UL						// Baud rate
-	#define UBRR_VAL	((F_CPU+BAUD*8)/(BAUD*16)-1)	// =??
+	#define BAUD		115200UL
+	#define UBRR_VAL	((F_CPU+BAUD*8)/(BAUD*16)-1)
  
-	/* Register names USART0 */
+ 	// Adjust general names to register 0
 	#define UBRRnH	UBRR0H
 	#define UBRRnL	UBRR0L
  
@@ -30,9 +31,21 @@
 	#define RXCn	RXC0
 	#define TXB8	TXB80
  
+ 	// Sets the baud rate and the format of the
+	// UART transmission. Enables communication
+ 	void uart_init(void);
+
+ 	// Sends a single character
+ 	void uart_putc(unsigned char data);
+
+ 	// Receives a single character
+	unsigned char uart_receive(void);
+
+	// Sends a string of chracters as fast as
+	// possible
 	void uart_puts(char *s);
-	void uart_putc(unsigned char data);
-	void uart_init(void);
+
+
 	//void uart_sendTwoArrays(int16_t *U, int16_t *I, int size);
  
-#endif /* UART_H_ */
+#endif //UART_H

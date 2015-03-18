@@ -3,6 +3,7 @@
  *
  * Created: 20.02.2015 15:48:38
  *  Author: Strice
+ *  Source: http://www.mikrocontroller.net/articles/AVR_-_Die_genaue_Sekunde_/_RTC
  */ 
 
 #include "rtc.h"

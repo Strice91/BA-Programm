@@ -1,3 +1,10 @@
+/*
+ * adc.c
+ *
+ * Created: 28.01.2015 09:55:24
+ *  Author: Strice
+ *	Source: Atmel-Studio standard Lib ADC
+ */ 
 
 // includes
 #include "adc.h"

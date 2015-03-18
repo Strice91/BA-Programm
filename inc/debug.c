@@ -4,6 +4,7 @@
  * Created: 21.02.2015 16:44:36
  *  Author: Strice
  */ 
+ 
 #include "debug.h"
 
 void debug_init(void){

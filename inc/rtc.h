@@ -3,7 +3,11 @@
  *
  * Created: 20.02.2015 15:48:56
  *  Author: Strice
+ *  Source: http://www.mikrocontroller.net/articles/AVR_-_Die_genaue_Sekunde_/_RTC
  */ 
+#ifndef RTC_H
+ #define RTC_H
+
 #include "BitUtilities.h"
 #include <avr/io.h>
 #include <avr/interrupt.h>
@@ -30,3 +34,5 @@ void rtc_initSample(void);
 // and update On Compare Register if sample frequency is no
 // factor of CPU Frequency
 void rtc_checkSecondsAndRemainder(void);
+
+#endif //RTC_H
