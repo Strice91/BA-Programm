@@ -39,8 +39,9 @@
 	// ADC voltage references
 	enum adc_vref {
 		ADC_VREF_1V1 =	(1<<REFS1),				// Set reference voltage to 1.1V 
-		ADC_VREF_2V56 = (1<<REFS0)|(1<<REFS1),	//  Set reference voltage to 2.56V 
-		ADC_VREF_AREF = (1<<REFS0),				//  Set reference voltage to AREF
+		ADC_VREF_2V56 = (1<<REFS0)|(1<<REFS1),	// Set reference voltage to 2.56V 
+		ADC_VREF_AVCC = (1<<REFS0),				// Set reference voltage to AVCC
+		ADC_VREF_AREF = 0x00,					// Set reference voltage to external AREF
 	};
 
 	// ADC input MUX settings

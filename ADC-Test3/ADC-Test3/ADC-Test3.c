@@ -24,7 +24,7 @@ int main(void)
 	lcd_puts("LCD OK");
 	lcd_gotoxy(0,1);
 	
-	adc_init(ADC_VREF_2V56, ADC_PRESCALER_DIV128, ADC_AUTOTRIGGER_SOURCE_FREERUNNING);
+	adc_init(ADC_VREF_AREF, ADC_PRESCALER_DIV128, ADC_AUTOTRIGGER_SOURCE_FREERUNNING);
 	
 	//debug_ledOn();
 	

@@ -67,7 +67,7 @@ int main(void){
 	
 	ADCSRA |=  (1<<ADEN) |  (1<<ADATE) | (1<<ADIE) | (1<<ADPS2)  | (1<<ADPS0);
 	// -1.ADC-init
-	ADMUX |= (1<<REFS0); 					// 0.MUX setzen, AVCC als Ref., Kanal1 ausgewählt
+	//ADMUX |= (1<<REFS0); 					// 0.MUX setzen, AVCC als Ref., Kanal1 ausgewählt
 	SFIOR  |=  (1<<ADTS1) |(1<<ADTS0);  	// 1. Auslösung der AD-Wandlung auf Timer setzen
 	
 	rtc_initSample();

@@ -70,7 +70,7 @@ int main(void)
 }
 
 void smp_init(void){
-	adc_init(ADC_VREF_2V56, ADC_PRESCALER_DIV128, ADC_AUTOTRIGGER_SOURCE_FREERUNNING);
+	adc_init(ADC_VREF_AREF, ADC_PRESCALER_DIV128, ADC_AUTOTRIGGER_SOURCE_FREERUNNING);
 }
 
 void smp_sample(void){
