@@ -8,7 +8,7 @@ for i = data_set_vec
    [S(i), P(i), cosPhi(i)] = getPower(U{i},I{i});  
 end
 
-Phi = acosd(cosPhi);
+Phi = acosd(cosPhi/1000);
 
 figure;
 

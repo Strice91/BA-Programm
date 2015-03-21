@@ -62,7 +62,7 @@ void smp_sampleCalculation(void){
 	i_sum += (int32_t)I_ADC;
 	
 	u_temp = ((int32_t)U_ADC - (int32_t)U_MEAN);
-	i_temp = -((int32_t)I_ADC - (int32_t)I_MEAN);
+	i_temp = ((int32_t)I_ADC - (int32_t)I_MEAN);
 	p_temp = (int64_t)u_temp * (int64_t)i_temp;
 	
 	UsqSum += (uint64_t)(u_temp * u_temp);
@@ -130,12 +130,12 @@ int main(void)
 			debug_ledOn();
 			
 			smp_mainCalculation();
-			/*
+			
 			_delay_ms(250);
 			sprintf(str,"UsqSum|%10lu| IsqSum|%10lu| Psum|%10li| Umean|%5i| Imean|%5i| URMS|%10lu| IRMS|%10lu| S|%10lu| P|%10li| cos|%5i|\n\r",(uint32_t)UsqSum,(uint32_t)IsqSum,(int32_t)Psum,U_MEAN,I_MEAN,U_RMS,I_RMS,S,P,power_factor);
 			uart_puts(str);
-			*/
 			
+			/*
 			uart_puts("S\n\r");
 			for(i=0;i<=499;i++){
 				sprintf(str,"%i\n\r",U_Array[i]);
@@ -146,7 +146,7 @@ int main(void)
 				uart_puts(str);
 			}
 			uart_puts("E\n\r");
-			
+			*/
 			second = 0;
 			debug_ledOff();
 			
