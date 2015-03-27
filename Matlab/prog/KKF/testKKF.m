@@ -1,5 +1,5 @@
 
-clear all;
+%clear all;
 close all;
 
 %=================
@@ -20,11 +20,13 @@ gradToRad = 1/radToGrad;
 %=================
 T=1/f;              %Periodendauer
 ts=1/fs;            %Abtastdauer
-t=0:ts:(T*n - ts);
+t=0:499%0:ts:(T*n - ts);
 phiRAD = phiGRAD * gradToRad;
 
-x1=sin(2*pi*f*t);
-x2=sin(2*pi*f*t - phiRAD);
+%x1=sin(2*pi*f*t);
+%x2=sin(2*pi*f*t - phiRAD);
+x1 = U{5};
+x2 = I{5};
 
 corr = conv(x1,x2);             %Faltung
 tCorr = [fliplr(-t(2:end)) t];  %Zeitvektor fuer Faltung
