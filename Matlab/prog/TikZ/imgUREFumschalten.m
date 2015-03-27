@@ -1,4 +1,4 @@
-function imgVREFumschalten()
+function imgUREFumschalten()
 close all;
 V1 = load('data\VREF05.mat');
 V1 = V1.VREF;
@@ -15,5 +15,5 @@ figure;
 plot(x,V1(1:end-1),x,V2(1:end-1));
 legend('Mit Kondensator','Ohne Kondensator');
 xlabel('t [s]')
-ylabel('V_{REF} [V]')
+ylabel('U_{REF} [V]')
 end
