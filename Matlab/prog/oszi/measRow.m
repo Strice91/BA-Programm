@@ -1,4 +1,4 @@
-function [U,I] = measRow(channels,rows)
+function [U,I,timediff] = measRow(channels,rows)
 
 for r = 1:rows
     while 1
@@ -11,7 +11,7 @@ for r = 1:rows
         fprintf(sprintf('Measuring Data Set %d\n',r));
         input('Start Measurement with Enter');
         
-        d = readWaveform(channels);
+        [d,timediff{r}] = readWaveform(channels);
         I{r} = d{1};
         U{r} = d{2};
         
@@ -30,7 +30,7 @@ prompt = 'Enter filename to save Measurement: ';
 filename = input(prompt,'s');
 if filename
 path = fullfile('data',filename);
-save(path,'U','I')
+save(path,'U','I','timediff')
 end
 
 end

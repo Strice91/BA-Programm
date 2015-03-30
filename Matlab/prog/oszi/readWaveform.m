@@ -1,4 +1,4 @@
-function [ data ] = readWaveform(channels)
+function [ data, timediff ] = readWaveform(channels)
 
 % Find a VISA-USB object.
 obj1 = instrfind('Type', 'visa-usb', 'RsrcName', 'USB0::0x1AB1::0x04CE::DS1ZA165260837::0::INSTR', 'Tag', '');
@@ -53,8 +53,12 @@ for c = 1:chan_num
         d(i) = str2double(array{i});
     end
     
+    
     data{c} = d;
 end
+
+% Read Time difference between x values
+timediff = str2num(query(obj1, ':WAV:XINC?'));
 
 fprintf(obj1, ':RUN');
 
