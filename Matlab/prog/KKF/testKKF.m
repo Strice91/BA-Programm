@@ -20,7 +20,8 @@ gradToRad = 1/radToGrad;
 %=================
 T=1/f;              %Periodendauer
 ts=1/fs;            %Abtastdauer
-t=0:499%0:ts:(T*n - ts);
+%t=0:499
+0:ts:(T*n - ts);
 phiRAD = phiGRAD * gradToRad;
 
 %x1=sin(2*pi*f*t);
