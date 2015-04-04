@@ -1,4 +1,4 @@
-function imgMinMax()
+function imgMaximum()
 close all;
 u = genSinus(3.2, 2, 100, 0, 1, 0);
 i = genSinus(1.76, 2, 100, pi/3, 1, 0);

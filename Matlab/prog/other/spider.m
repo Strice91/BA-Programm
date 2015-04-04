@@ -160,7 +160,7 @@ set(ca,'nextplot','add');
 set(ca,'visible','off'); set(f,'color','w')
 set(ca,'xlim',[-1.25 1.25],'ylim',[-1.25 1.25]); axis(ca,'equal','manual')
 % title
-text(0,1.3,tle,'horizontalalignment','center','fontweight','bold');
+%text(0,1.3,tle,'horizontalalignment','center','fontweight','bold');
 
 
 % define data case colors
