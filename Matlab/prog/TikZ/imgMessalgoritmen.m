@@ -16,8 +16,8 @@ close all;
 % set(gcf,'color','w');
 % legend(names{:});
 
-criteria = {'Umsetzbarkeit','Robustheit','Genauigkeit','Speichernutzung','Geschwindigekeit','Features'};
-names = {   'Min/Max','Goerzel','KKF','RMS'};
+criteria = {'Umsetzbarkeit','Robustheit','Genauigkeit','Speichernutzung','Geschwindigekeit','Ergebnisse'};
+names = {   'Maximum','Goerzel','KKF','RMS'};
 
 mm = [ 7, 3, 1, 9, 9, 2];
 go = [ 1, 7, 4, 3, 1, 5];
@@ -31,4 +31,5 @@ color = {'r','y','g','b'};
 tle = 'Messalgorithmen';
 rng = [10;10;10;10;10;10];
 spider(data,tle,rng,criteria,names,color);
+matlab2tikz('../../../../tex/Dok/img/Messalgorithmen.tikz');
 end
