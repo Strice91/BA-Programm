@@ -1,7 +1,7 @@
 function [ Perr, Prel ] = powerEval(Data,do_plot,Pref)
-close all;
+%close all;
 max_Power = 47;
-max_mean_P = mean(Data{12}.P);
+max_mean_P = 9914685; %mean(Data{12}.P);
 set_cnt = length(Data);
 x = 1:length(Data{12}.P);
 
@@ -22,7 +22,7 @@ for i = 1:set_cnt
    end
 end
 
-Prel = zeros(size(P));
+Prel = ones(size(P)) * Inf;
 for i = 2:set_cnt
    for j = x
        Prel(i,j) = (Perr(i,j) / Pref(i)) * 100;

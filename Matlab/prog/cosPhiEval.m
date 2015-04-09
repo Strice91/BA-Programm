@@ -1,4 +1,4 @@
-function [ PFerr, PFrel] = cosPhiEval(Data,do_plot,Kap)
+function [ PFerr, PFrel, PFref] = cosPhiEval(Data,do_plot,Kap)
 close all;
 set_cnt = length(Data);
 x = 1:length(Data{12}.cos);
@@ -28,7 +28,7 @@ for i = 1:set_cnt
    end
 end
 
-PFrel = zeros(size(PF));
+PFrel = ones(size(PF)) * Inf;
 for i = 2:set_cnt
    for j = x
        PFrel(i,j) = (PFerr(i,j) / PFref(i)) * 100;
