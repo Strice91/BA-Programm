@@ -40,20 +40,21 @@ if(do_plot)
     for i = 1:set_cnt
         plot(x,ones(size(x))*Pref(i),'k--');
     end
+    xlabel('Messwert Nr.');
+    ylabel('Leistung [W]');
+%     figure;
+%     set(gca,'ColorOrder',jet(set_cnt)) 
+%     hold all
+%     for i = 1:set_cnt
+%         plot(x,Perr(i,:));
+%     end
 
-    figure;
-    set(gca,'ColorOrder',jet(set_cnt)) 
-    hold all
-    for i = 1:set_cnt
-        plot(x,Perr(i,:));
-    end
-
-    figure;
-    set(gca,'ColorOrder',jet(set_cnt))
-    hold all
-    for i = 1:set_cnt
-        plot(x,Prel(i,:));
-    end    
+%     figure;
+%     set(gca,'ColorOrder',jet(set_cnt))
+%     hold all
+%     for i = 1:set_cnt
+%         plot(x,Prel(i,:));
+%     end    
 end
 
 end

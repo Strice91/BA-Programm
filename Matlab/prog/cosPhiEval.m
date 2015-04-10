@@ -1,5 +1,5 @@
 function [ PFerr, PFrel, PFref] = cosPhiEval(Data,do_plot,Kap)
-close all;
+%close all;
 set_cnt = length(Data);
 x = 1:length(Data{12}.cos);
 
@@ -46,22 +46,23 @@ if(do_plot)
     end
     
     for i = 1:set_cnt
-        plot(x,ones(size(x))*PFref(i),'--');
+        plot(x,ones(size(x))*PFref(i),'k--');
     end
+    xlabel('Messwert Nr.');
+    ylabel('Wirkfaktor');
+%     figure;
+%     set(gca,'ColorOrder',jet(set_cnt)) 
+%     hold all
+%     for i = 1:set_cnt
+%         plot(x,PFerr(i,:));
+%     end
     
-    figure;
-    set(gca,'ColorOrder',jet(set_cnt)) 
-    hold all
-    for i = 1:set_cnt
-        plot(x,PFerr(i,:));
-    end
-    
-    figure;
-    set(gca,'ColorOrder',jet(set_cnt)) 
-    hold all
-    for i = 1:set_cnt
-        plot(x,PFrel(i,:));
-    end
+%     figure;
+%     set(gca,'ColorOrder',jet(set_cnt)) 
+%     hold all
+%     for i = 1:set_cnt
+%         plot(x,PFrel(i,:));
+%     end
     
 end
 

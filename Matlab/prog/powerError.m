@@ -13,8 +13,8 @@ meanRel = mean(PRel,2);
 
 figure;
 plotyy(Pref,meanErr,Pref,meanRel);
-text(-4,0.4,'Err [W]','rotation',90,'color','b')
-text(54,0.4,'Err [%]','rotation',90,'color',[0 0.502 0])
+text(-4,0.4,'Fehler [W]','rotation',90,'color','b')
+text(54,0.4,'Fehler [%]','rotation',90,'color',[0 0.502 0])
 xlabel('Wirkleistung [W]');
 grid on;
 end

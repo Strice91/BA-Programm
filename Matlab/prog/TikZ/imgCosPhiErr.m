@@ -18,13 +18,15 @@ legend('x_u(t)','x_i(t) 90^\circ','x_i(t) 22^\circ','x_i(t) 11^\circ',...
     'Location','northwest')
 xlabel('t [s]')
 ylabel('[V]')
-matlab2tikz('../../../../tex/Dok/img/phasenverschiebung.tikz');
+matlab2tikz('../../../../tex/Dok/img/Err/phaseX.tikz');
 
-% load('data/D19.mat');
-% powerError(Data);
-% matlab2tikz('../../../../tex/Dok/img/PErr0.tikz');
-% load('data/D20.mat');
-% powerError(Data);
-% matlab2tikz('../../../../tex/Dok/img/PErr40.tikz');
+load('data/D21')
+cosPhiError(Data,3)
+matlab2tikz('../../../../tex/Dok/img/Err/PFErr.tikz');
+
+cosPhiEval(Data,1,3)
+box on;
+xlim([1,20]);
+matlab2tikz('../../../../tex/Dok/img/Err/messwertePF.tikz');
 end
 

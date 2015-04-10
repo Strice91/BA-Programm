@@ -23,21 +23,20 @@ legend('x_u(t)','x_i(t) 0W','x_i(t) 21W','x_i(t) 46W',...
      'Location','northwest')
 xlabel('t [s]')
 ylabel('[V]')
-matlab2tikz('../../../../tex/Dok/img/leistungssufenX.tikz');
-
-figure;
-plot(x,u2,x,i2,x,i3,x,i4);
-legend('x_u(t)','x_i(t) 90^\circ','x_i(t) 22^\circ','x_i(t) 11^\circ',...
-    'Location','northwest')
-xlabel('t [s]')
-ylabel('[V]')
-matlab2tikz('../../../../tex/Dok/img/phasenverschiebung.tikz');
+matlab2tikz('../../../../tex/Dok/img/Err/leistungssufenX.tikz');
 
 load('data/D19.mat');
 powerError(Data);
-matlab2tikz('../../../../tex/Dok/img/PErr0.tikz');
+matlab2tikz('../../../../tex/Dok/img/Err/PErr0.tikz');
+powerEval(Data,1);
+box on;
+xlim([1,20]);
+matlab2tikz('../../../../tex/Dok/img/Err/messwerteP.tikz');
+
 load('data/D20.mat');
 powerError(Data);
-matlab2tikz('../../../../tex/Dok/img/PErr40.tikz');
+matlab2tikz('../../../../tex/Dok/img/Err/PErr40.tikz');
+
+
 end
 
