@@ -22,12 +22,13 @@ hold all;
 plot(x,U(:,1),'b')
 plot(x,U(:,2),'r')
 plot(x,U(:,3),'g')
-plot(x,I(:,1),'b:')
-plot(x,I(:,2),'r:')
-plot(x,I(:,3),'g:')
+plot(x,I(:,1),'b:','LineWidth',2)
+plot(x,I(:,2),'r:','LineWidth',2)
+plot(x,I(:,3),'g:','LineWidth',2)
 legend('U1','U2','U3','I1','I2','I3');
 xlabel('t [ms]')
 ylabel('[V] | [A]');
-matlab2tikz
+
+matlab2tikz('../../../../tex/Dok/img/TUMN4.tikz');
 end
 
