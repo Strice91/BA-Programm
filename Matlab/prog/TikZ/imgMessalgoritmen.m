@@ -16,7 +16,7 @@ close all;
 % set(gcf,'color','w');
 % legend(names{:});
 
-criteria = {'Umsetzbarkeit','Robustheit','Genauigkeit','Speichernutzung','Geschwindigekeit','Ergebnisse'};
+criteria = {'Umsetzbarkeit','Robustheit','Genauigkeit','Speichernutzung','Geschwindigkeit','Ergebnisse'};
 names = {   'Maximum','Goerzel','KKF','RMS'};
 
 mm = [ 7, 3, 1, 9, 9, 2];

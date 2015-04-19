@@ -46,9 +46,9 @@ phiErr = abs(phiCalcGrad-phiGRAD);            %Phasen-Fehler
 %grid on;
 
 %subplot(2,1,2);
-plot(tCorr,corr,color);
+plot(tCorr*1000,corr,color,'LineWidth',2);
 err= phiErr/phiGRAD;
-text(tCorr(j), corr(j), strcat('\leftarrow \Deltat = ', num2str(deltaT,'%.4f'),...
+text(tCorr(j)*1000, corr(j), strcat('\leftarrow \Deltat = ', num2str(deltaT,'%.4f'),...
     ' Err=', num2str(err*100,'%2.0f'), '%'), 'FontSize', 10);
 %legend('Crosscorrelation');
 %grid on;

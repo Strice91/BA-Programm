@@ -17,7 +17,7 @@ plot(x,u2,x,i2,x,i3,x,i4);
 legend('x_u(t)','x_i(t) 90^\circ','x_i(t) 22^\circ','x_i(t) 11^\circ',...
     'Location','northwest')
 xlabel('t [s]')
-ylabel('[V]')
+ylabel('[V] (AC)')
 matlab2tikz('../../../../tex/Dok/img/Err/phaseX.tikz');
 
 load('data/D21')

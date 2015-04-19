@@ -22,7 +22,7 @@ plot(x,ua,x,ia,x,ib,x,ic);
 legend('x_u(t)','x_i(t) 0W','x_i(t) 21W','x_i(t) 46W',...
      'Location','northwest')
 xlabel('t [s]')
-ylabel('[V]')
+ylabel('[V] (AC)')
 matlab2tikz('../../../../tex/Dok/img/Err/leistungssufenX.tikz');
 
 load('data/D19.mat');
