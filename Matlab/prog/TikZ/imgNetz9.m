@@ -18,7 +18,7 @@ end
 I(:,3) = -I(:,3);
 
 
-figure;
+f = figure;
 hold all;
 plot(x,U(:,2),'b')
 plot(x,U(:,1),'r')
@@ -31,5 +31,7 @@ xlabel('t [ms]')
 ylabel('[V] | [A]');
 
 matlab2tikz('../../../../tex/Dok/img/TUM9.tikz');
+
+%print(f,'-dpng','Wave9.png')
 end
 

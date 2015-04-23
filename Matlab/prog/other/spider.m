@@ -223,8 +223,8 @@ o = polar(ca,angw*ones(1,c),magw);
 for ii = 1:c; set(o(ii),'color',colors{ii},'linewidth',1.5); end
 
 % apply the legend
-temp = legend(o,leg,'Position',[1.2,0.7,0.1,0.1]);
-
+%temp = legend(o,leg,'Position',[1.2,0.7,0.1,0.1]);
+temp = legend(o,leg,'Position',[0.8,0.65,0.1,0.1]);
 return
 
 function [v] = rd(v,dec)

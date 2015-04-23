@@ -17,7 +17,7 @@ for i = 1:3
 end
 
 
-figure;
+f = figure;
 hold all;
 plot(x,U(:,1),'b')
 plot(x,U(:,2),'r')
@@ -30,5 +30,6 @@ xlabel('t [ms]')
 ylabel('[V] | [A]');
 
 matlab2tikz('../../../../tex/Dok/img/TUMN4.tikz');
+%print(f,'-dpng','WaveN4.png')
 end
 

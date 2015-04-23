@@ -30,6 +30,7 @@ data = [mm',go',kk',rm'];
 color = {'r','y','g','b'};
 tle = 'Messalgorithmen';
 rng = [10;10;10;10;10;10];
-spider(data,tle,rng,criteria,names,color);
-matlab2tikz('../../../../tex/Dok/img/Messalgorithmen.tikz');
+f = spider(data,tle,rng,criteria,names,color);
+%matlab2tikz('../../../../tex/Dok/img/Messalgorithmen.tikz');
+print(f,'-dpng','Messalgorithmen.png')
 end

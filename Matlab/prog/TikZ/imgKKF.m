@@ -1,6 +1,6 @@
 function imgKKF()
 close all;
-figure;
+f = figure;
 testKKF(20,'r')
 hold on
 testKKF(100,'b')
@@ -9,6 +9,7 @@ text(-15,-10,'\Deltat ref = 0.0022');
 text(-15,-15,'phi = 40deg')
 ylabel('Kreuzkorrelation')
 xlabel('t [ms]')
-matlab2tikz('../../../../tex/Dok/img/kkf.tikz');
+%matlab2tikz('../../../../tex/Dok/img/kkf.tikz');
+print(f,'-dpng','KKF.png')
 end
 

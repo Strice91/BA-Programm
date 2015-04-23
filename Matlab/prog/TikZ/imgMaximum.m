@@ -12,7 +12,7 @@ indexU = indexU * 0.4;
 indexI = indexI * 0.4;
 x = (1:length(u)) * 0.4;
 
-figure;
+f = figure;
 hold on
 plot(x,u,'r','LineWidth',2);
 plot(x,i,'g--','LineWidth',2);
@@ -27,5 +27,7 @@ text(indexU,mean([peakU,peakI]),'\leftarrow  \Deltat  \rightarrow', 'FontSize', 
 ylabel('Signalverlauf [V]');
 xlabel('t [ms]');
 
-matlab2tikz('../../../../tex/Dok/img/maximum.tikz');
+%matlab2tikz('../../../../tex/Dok/img/maximum.tikz');
+print(f,'-dpng','Maximum.png')
+
 end
