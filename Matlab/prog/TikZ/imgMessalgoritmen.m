@@ -27,7 +27,7 @@ rm = [ 7, 5, 6, 9, 8, 3];
 data = [mm',go',kk',rm'];
 
 %data = rand(6,4)*10 - 5;     
-color = {'r','y','g','b'};
+color = {'r',[0.96,0.72,0],'g','b'};
 tle = 'Messalgorithmen';
 rng = [10;10;10;10;10;10];
 f = spider(data,tle,rng,criteria,names,color);
